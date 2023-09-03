@@ -1,6 +1,18 @@
 import * as THREE from 'three'
 let scene, camera, renderer, cloudParticles = [], flash, rain, rainGeo, rainCount = 15000, rainParticles = [];
 
+// rainsound
+
+const audio = document.createElement('audio');
+
+audio.src = './static/rainSound.wav';
+audio.autoplay = true;
+audio.loop = true;
+audio.controls = false;
+
+document.body.appendChild(audio)
+
+
 // Scene 
  scene = new THREE.Scene();
 const size ={
