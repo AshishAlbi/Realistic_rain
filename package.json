@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "three": "^0.151.3",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "vite-plugin-copy": "^0.1.6"
   }
 }
