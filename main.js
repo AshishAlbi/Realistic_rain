@@ -1,4 +1,8 @@
 import * as THREE from 'three'
+
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+
 let scene, camera, renderer, cloudParticles = [], flash, rain, rainGeo, rainCount = 15000, rainParticles = [];
 
 // rainsound
@@ -10,7 +14,34 @@ audio.autoplay = true;
 audio.loop = true;
 audio.controls = false;
 
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": true,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+};
+
 document.body.appendChild(audio)
+console.log(navigator.userAgent);
+if(navigator.userAgent.includes('Chrome/')){
+
+  toastr.info('Click on the screen to hear the nature')
+
+    document.body.addEventListener("click",()=>{
+      audio.play();
+    })
+}
 
 
 // Scene 
@@ -30,8 +61,8 @@ const ambientLight = new THREE.AmbientLight(0x555555);
 scene.add(ambientLight);
 
 // lightning
-flash = new THREE.PointLight(0x87CEEB, 30, 500, 1.7);
-flash.position.set(200, 300, 100);
+flash = new THREE.PointLight(0x87CEEB, 50, 500, 1.7);
+flash.position.set(200, 300, 300);
 scene.add(flash);
 
 let directionalLight = new THREE.DirectionalLight(0xffeedd);
@@ -110,7 +141,7 @@ function addClouds(){
  
 function animate(){
   cloudParticles.forEach(particles=>{
-    particles.rotation.z += 0.0005
+    particles.rotation.z += 0.001
   })
 
   // Rain animation
